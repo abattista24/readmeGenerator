@@ -1,7 +1,9 @@
 // create a README
-const fs =require("fs")
-const inquirer = require("inquirer")
+const fs =require("fs");
+const inquirer = require("inquirer");
+const util =require("util");
 
+const writeFileAsync = util.promisify(fs.writeFile);
 
 // array of questions for user
 const questions = [ 
@@ -55,16 +57,53 @@ const questions = [
   }
 ];
 
-    // prompt user
-return inquirer.prompt(questions);
+// function to write README file
 
-    
 const fileName = "userREADME.md";
-     
-    // function to write README file
-function writeToFile(fileName, data) {
-  
-}
+
+function writeToFile(title,description,install,use,license,contribution, tests, gitHubUrl,email) {return `
+# $(title)
+### Table of Contents
+  [Description](#description)     
+  [Installation](#installation)       
+  [Usage](#usage)     
+  [License](#license)     
+  [Contributing](#contributing)   
+  [Tests](#tests)   
+  [Questions](#questions)
+## Description
+  $(description)
+## Installation
+  $(install)
+## Usage
+  $(use)
+## License
+  $(license)
+## Contributing
+  $(contribution)
+## Tests
+  $(tests)
+## Questions
+  $(gitHubUrl), $(email)`
+
+  }
+
+// prompt user
+inquirer.prompt(questions)
+
+ // write user input to readme.md file, call userReadme.md
+.then(function(data){
+  return writeToFile (data)
+})
+.then(function(readmeFile){
+  return writeFileAsync (fileName, readmeFile)
+})
+.then(function(){
+  console.log ("creating file")
+})
+.catch(function(error){
+  console.log(error)
+})
 
 // function to initialize program
 function init() {
@@ -77,7 +116,7 @@ init();
 
 
 
-  // write user input to readme.md file, call userReadme.md
+ 
     //needs to have table of contenets with usable links
       //Installation
       //Usage
