@@ -61,7 +61,7 @@ const questions = [
 
 const fileName = "userREADME.md";
 
-function writeToFile(title,description,install,use,license,contribution, tests, gitHubUrl,email) {return `
+function writeToFile({title,description,install,use,license,contribution, tests, gitHubUrl,email}) {return `
 # $(title)
 ### Table of Contents
   [Description](#description)     
@@ -72,19 +72,21 @@ function writeToFile(title,description,install,use,license,contribution, tests, 
   [Tests](#tests)   
   [Questions](#questions)
 ## Description
-  $(description)
+  ${description}
 ## Installation
-  $(install)
+  ${install}
 ## Usage
-  $(use)
+  ${use}
 ## License
-  $(license)
+  ${license}
 ## Contributing
-  $(contribution)
+  ${contribution}
 ## Tests
-  $(tests)
+  ${tests}
 ## Questions
-  $(gitHubUrl), $(email)`
+  please contact me on GitHub at ${gitHubUrl},
+  or through my <a mailto href=${email}> email </a>
+  `
 
   }
 
@@ -117,7 +119,7 @@ init();
 
 
  
-    //needs to have table of contenets with usable links
+   
       //Installation
       //Usage
       //License
